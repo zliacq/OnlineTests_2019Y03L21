@@ -6,7 +6,7 @@ import java.util.List;
 
 class Inventory<T extends Item> {
 
-    private List<T> items = new ArrayList<T>();
+    private List<T> items = new ArrayList<>();
 
     public void add(T item) {
         items.add(item);

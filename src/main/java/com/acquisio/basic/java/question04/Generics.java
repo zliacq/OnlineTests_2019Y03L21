@@ -29,7 +29,7 @@ public class Generics {
     }
 
     private Inventory getVegetableInventory() {
-        Inventory<Vegetable> vegetableInventory = new Inventory<Vegetable>();
+        Inventory<Vegetable> vegetableInventory = new Inventory<>();
         vegetableInventory.add(new Vegetable("Salad", "Iceberg", "QuÃ©bec", 19, 1.39d));
         vegetableInventory.add(new Vegetable("Salad", "Boston", "QuÃ©bec", 18, 1.39d));
         vegetableInventory.add(new Vegetable("Salad", "Iceberg", "USA", 17, 1.39d));
@@ -37,7 +37,7 @@ public class Generics {
     }
 
     private Inventory getFruitInventory() {
-        Inventory<Fruit> fruitInventory = new Inventory<Fruit>();
+        Inventory<Fruit> fruitInventory = new Inventory<>();
         fruitInventory.add(new Fruit("Apple", "red", 50, 0.99d));
         fruitInventory.add(new Fruit("Apple", "green", 45, 1.29d));
         fruitInventory.add(new Fruit("Banana", "yellow", 150, 0.49d));

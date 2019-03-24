@@ -118,9 +118,7 @@ public class Refactoring {
 
             switch (items[i].name) {
                 case "Aged Brie":
-                    if(items[i].quality > 0){
-                        items[i].quality--;
-                    }
+                    qualityDecreaseByDay(items[i]);
                     if(items[i].sellIn > 0){
                         items[i].sellIn--;
                     }else{
@@ -128,9 +126,7 @@ public class Refactoring {
                     }
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
-                    if(items[i].quality > 0){
-                        items[i].quality--;
-                    }
+                    qualityDecreaseByDay(items[i]);
                     if(items[i].sellIn> 0){
                         if(items[i].sellIn < 11){
                             items[i].quality = items[i].quality <49 ? items[i].quality += 2 : 50;
@@ -148,9 +144,7 @@ public class Refactoring {
                     // legendary product : do nothing !
                     break;
                 default:
-                    if(items[i].quality > 0){
-                        items[i].quality--;
-                    }
+                    qualityDecreaseByDay(items[i]);
                     if(items[i].sellIn > 0){
                         items[i].sellIn--;
                     }else{
@@ -161,6 +155,16 @@ public class Refactoring {
 
         }
 
+    }
+
+    /**
+     * quality decrease by one everyday
+     * @param item the product
+     */
+    private void qualityDecreaseByDay(Item item) {
+        if(item.quality > 0){
+            item.quality--;
+        }
     }
 
 }
