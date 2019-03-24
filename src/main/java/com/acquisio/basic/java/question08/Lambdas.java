@@ -2,8 +2,12 @@ package com.acquisio.basic.java.question08;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.text.DecimalFormat;
+import java.util.stream.Stream;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * QUESTION 09: Lambdas (https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html)
@@ -19,6 +23,11 @@ import java.nio.file.Files;
  * IMPORTANT: Add all missing javadoc and/or unit tests that you think is necessary.
  */
 public class Lambdas {
+
+    private static final String DELIMITER = ",";
+    private static final double AMOUNT_THRESHOLD = 50.0;
+    private static final String NUMBER_FORMAT = "#.00";
+
     public static void main(String[] args) throws IOException, URISyntaxException {
         Lambdas instance = new Lambdas();
         File input = new File(Thread.currentThread().getContextClassLoader().getResource("./carts.csv").toURI());
@@ -32,8 +41,34 @@ public class Lambdas {
         }
     }
 
+    /**
+     * This is the converter for input file
+     * @param input input file
+     * @param output output file
+     * @throws IOException exception
+     */
     void convertCarts(File input, File output) throws IOException {
-        // TODO: Insert your code here.
+        try (Stream<String> lines = Files.lines(input.toPath());
+             PrintWriter printWriter = new PrintWriter(Files.newBufferedWriter(output.toPath()))) {
+            lines.filter(line -> Double.parseDouble(line.split(DELIMITER)[1]) >= AMOUNT_THRESHOLD)
+                    .forEachOrdered(line -> printWriter.println(convertNewLine(line)));
+        }
     }
 
+    /**
+     * This is the line string converter
+     * @param line content of line
+     * @return converted line
+     */
+    private String convertNewLine(String line) {
+        String[] values = line.split(DELIMITER);
+
+        double amount = Double.parseDouble(values[1]);
+        double tax = amount * 0.15;
+        double total = amount + tax;
+
+        DecimalFormat decimalFormat = new DecimalFormat(NUMBER_FORMAT);
+        return StringUtils.join(new String[] {values[0], values[1], decimalFormat.format(tax), decimalFormat.format(total), values[3]},
+                DELIMITER);
+    }
 }

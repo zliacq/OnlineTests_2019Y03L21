@@ -22,7 +22,8 @@ import java.sql.*;
  */
 public class H2DBUtil {
 
-    private final static String DB_URL = "jdbc:h2:tcp://localhost/~/acquisio;ALIAS_COLUMN_NAME=TRUE";
+    //private final static String DB_URL = "jdbc:h2:tcp://localhost/~/acquisio;ALIAS_COLUMN_NAME=TRUE";
+    private final static String DB_URL = "jdbc:h2:mem:default;ALIAS_COLUMN_NAME=TRUE;DB_CLOSE_DELAY=-1";
     private final static String DB_USER = "sa";
     private final static String DB_PASSWORD = "";
 

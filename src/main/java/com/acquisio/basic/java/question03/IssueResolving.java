@@ -13,11 +13,17 @@ public class IssueResolving {
         System.out.println(instance.factorial(7));
     }
 
+    /**
+     * This method calculate the factorial of given integer
+     * @param n the integer to calculate
+     * @return factorial value
+     */
     int factorial(int n) {
         // TODO: Fix code here.
-        int result = 0;
-        result = factorial(n - 1) * n;
-        return result;
+        if(n == 0){
+            return 1;
+        };
+        return factorial(n - 1) * n;
     }
 
 }

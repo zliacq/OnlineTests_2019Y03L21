@@ -4,40 +4,25 @@ package com.acquisio.basic.java.question04;
 import java.util.ArrayList;
 import java.util.List;
 
-class Inventory {
+class Inventory<T extends Item> {
 
-    private List<Item> items = new ArrayList<>();
+    private List<T> items = new ArrayList<T>();
 
-    public void add(Item item) {
+    public void add(T item) {
         items.add(item);
     }
 
-    public Item getFirst() {
-        if (items.size() > 0) {
-            return items.get(0);
-        }
-        return null;
-    }
-
-    public Item getLast() {
-        int size = items.size();
-        if (size > 0) {
-            return items.get(size - 1);
-        }
-        return null;
-    }
-
-
-    public boolean remove(Item item) {
+    public boolean remove(T item) {
         return items.remove(item);
     }
 
-    public Item findFirst(String name) {
-        for (Item item : items) {
+    public T findFirst(String name) {
+        for (T item : items) {
             if (item.getName().equals(name)) {
                 return item;
             }
         }
         return null;
     }
+
 }

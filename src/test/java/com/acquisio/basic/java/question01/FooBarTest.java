@@ -7,8 +7,13 @@ import static org.junit.Assert.*;
 public class FooBarTest {
 
     @Test
-    public void testFooBar3() {
+    public void testFooBar1() {
         assertEquals("Foo", new FooBar().fooBar(3));
+    }
+
+    @Test
+    public void testFooBar2() {
+        assertEquals("Bar", new FooBar().fooBar(10));
     }
 
 }

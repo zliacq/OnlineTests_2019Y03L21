@@ -14,4 +14,13 @@ public class RefactoringTest {
         assertEquals("foo", app.items[0].name);
     }
 
+    @Test
+    public void testName2() {
+        Item[] items = new Item[]{new Item("foo", 10, 10),
+                new Item("foo1", 4, 7), new Item("foo2", 6, 10)};
+        Refactoring app = new Refactoring(items);
+        app.updateQuality();
+        assertEquals("foo2", app.items[2].name);
+    }
+
 }
