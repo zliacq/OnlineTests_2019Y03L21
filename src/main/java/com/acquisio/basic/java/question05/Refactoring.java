@@ -104,6 +104,7 @@ package com.acquisio.basic.java.question05;
  * IMPORTANT: Ajouter toute la javadoc et les test unitaires que vous jugez nécessaire.
  */
 public class Refactoring {
+
     Item[] items;
 
     public Refactoring(Item[] items) {
@@ -111,59 +112,43 @@ public class Refactoring {
     }
 
     /**
-     * The updated method based on the description above
+     * update quality of product items
      */
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-
-            switch (items[i].name) {
-                case "Aged Brie":
-                    qualityDecreaseByDay(items[i]);
-                    if(items[i].sellIn > 0){
-                        items[i].sellIn--;
-                    }else{
-                        items[i].quality = items[i].quality <49 ? items[i].quality += 2 : 50;
-                    }
-                    break;
-                case "Backstage passes to a TAFKAL80ETC concert":
-                    qualityDecreaseByDay(items[i]);
-                    if(items[i].sellIn> 0){
-                        if(items[i].sellIn < 11){
-                            items[i].quality = items[i].quality <49 ? items[i].quality += 2 : 50;
-                            if(items[i].sellIn < 6){
-                                // add extra 1 to make increase at rate 3/day
-                                items[i].quality = items[i].quality < 50 ? items[i].quality++ : 50;
-                            }
-                        }
-
-                    }else{
-                        items[i].quality = 0;
-                    }
-                    break;
-                case "Sulfuras, Hand of Ragnaros":
-                    // legendary product : do nothing !
-                    break;
-                default:
-                    qualityDecreaseByDay(items[i]);
-                    if(items[i].sellIn > 0){
-                        items[i].sellIn--;
-                    }else{
-                        items[i].quality = (items[i].quality > 0) ? items[i].quality-- : 0;
-                    }
-                    break;
+        for (Item item : items) {
+            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+                item.sellIn--;
+                switch (item.name) {
+                    case "Aged Brie":
+                        item.quality = item.quality < 50 ? item.quality + 1 : item.quality;
+                        break;
+                    case "Backstage passes to a TAFKAL80ETC concert":
+                        updateConcertQuality(item);
+                        break;
+                    case "Conjured":
+                        item.quality = item.quality > 0 ? item.quality - 2 : item.quality;
+                        break;
+                    default:
+                        item.quality = item.quality > 0 ? item.quality - 1 : item.quality;
+                        break;
+                }
             }
-
         }
-
     }
 
     /**
-     * quality decrease by one everyday
-     * @param item the product
+     * set quality depends on sellIn day
+     * @param item  item for check
      */
-    private void qualityDecreaseByDay(Item item) {
-        if(item.quality > 0){
-            item.quality--;
+    private void updateConcertQuality(Item item) {
+        if (item.sellIn < 0) {
+            item.quality = 0;
+        } else if (item.sellIn < 6) {
+            item.quality += 3;
+        } else if (item.sellIn < 11) {
+            item.quality += 2;
+        } else {
+            item.quality++;
         }
     }
 
